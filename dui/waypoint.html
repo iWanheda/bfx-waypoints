@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin: 0; padding: 0; }
+html, body {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transform: rotate(180deg);
+}
+.text-block {
+  padding-top: 12px;
+  text-align: center;
+}
+.distance {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4), 0 0 12px rgba(0,0,0,0.15);
+}
+.divider-wrap {
+  width: 70%;
+  margin: 10px auto;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.25)) drop-shadow(0 0 4px rgba(255,255,255,0.08));
+}
+.divider {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.6);
+  clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+}
+.sublabel {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+}
+.beam {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 14px;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.25)) drop-shadow(0 0 4px rgba(255,255,255,0.08));
+}
+.beam-line {
+  width: 20px;
+  flex: 1;
+  background: #FFFFFF;
+  clip-path: polygon(
+    42% 3%, 43% 1.8%, 45% 0.8%, 47% 0.2%, 50% 0%, 53% 0.2%, 55% 0.8%, 57% 1.8%, 58% 3%,
+    58% 90%,
+    50% 100%,
+    42% 90%
+  );
+}
+</style>
+</head>
+<body>
+<div class="text-block">
+  <div class="distance" id="dist">0m</div>
+  <div class="divider-wrap"><div class="divider" id="divider"></div></div>
+  <div class="sublabel" id="sub"></div>
+</div>
+<div class="beam">
+  <div class="beam-line" id="beam"></div>
+</div>
+<script>
+window.addEventListener('message', function(e) {
+  var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+  if (data.distance !== undefined) {
+    document.getElementById('dist').textContent = data.distance;
+  }
+  if (data.sublabel !== undefined) {
+    document.getElementById('sub').textContent = data.sublabel;
+  }
+  if (data.beamColor) {
+    var c = data.beamColor;
+    document.querySelector('.beam-line').style.background = c;
+    document.getElementById('divider').style.background = c;
+    document.querySelector('.beam').style.filter =
+      'drop-shadow(0 0 2px ' + c + '40) drop-shadow(0 0 4px ' + c + '14)';
+    document.querySelector('.divider-wrap').style.filter =
+      'drop-shadow(0 0 2px ' + c + '40) drop-shadow(0 0 4px ' + c + '14)';
+  }
+});
+</script>
+</body>
+</html>
