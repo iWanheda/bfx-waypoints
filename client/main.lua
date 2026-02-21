@@ -209,8 +209,3 @@ AddEventHandler("onResourceStop", function(res)
   if res ~= GetCurrentResourceName() then return end
   ClearWaypoints()
 end)
-
-
-RegisterCommand("test_checkpoint", function()
-  AddWaypoint(GetEntityCoords(PlayerPedId()) + vec3(10, 10, 0))
-end)
