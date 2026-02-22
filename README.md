@@ -8,6 +8,7 @@ Each waypoint renders as a vertical beam with a live-updating distance label and
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 [![Watch the video](https://img.youtube.com/vi/yhHGI7lbFCU/0.jpg)]([https://youtu.be/yhHGI7lbFCU](https://youtu.be/yhHGI7lbFCU))
+https://youtu.be/yhHGI7lbFCU
 ---
 
 ## 🌟 Features
